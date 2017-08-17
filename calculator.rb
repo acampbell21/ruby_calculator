@@ -4,12 +4,6 @@ require 'pry'
 @operators = ['+', '-', '*', '/']
 @numbers = []
 
-class String
-  def numeric?
-    Float(self) != nil rescue false
-  end
-end
-
 def menu
   puts 'Welcome to the ruby calculator!'
   puts '1)Solve a math problem'
@@ -45,11 +39,17 @@ def math_problem
   end
 end
 
+# class String
+#   def numeric?
+#     Float(self) != nil rescue false
+#   end
+# end
+
 def solve_math_problem
   puts 'What is your first number'
-  first_number = gets.chomp.to_f
-  if first_number.is_a? numeric?
-    @numbers << first_number
+  first_number = gets.chomp
+  if /\d+.?\d*/ =~ first_number
+    @numbers << first_number.to_f
   else
     puts 'start over'
     solve_math_problem
@@ -60,9 +60,9 @@ def solve_math_problem
   end
     @numbers << gets.chomp
   puts 'What is your second number' #prints out the [2] value in the array
-  second_number = gets.chomp.to_f
-  if second_number.is_a? numeric?
-    @numbers << second_number
+  second_number = gets.chomp
+  if /\d+.?\d*/ =~ second_number
+    @numbers << second_number.to_f
   else
     puts 'start over'
     solve_math_problem
